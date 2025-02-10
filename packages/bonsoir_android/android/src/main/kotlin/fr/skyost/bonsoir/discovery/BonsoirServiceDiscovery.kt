@@ -113,7 +113,10 @@ class BonsoirServiceDiscovery(
         bonsoirService = BonsoirService(service)
         services.add(bonsoirService)
         onSuccess(Generated.discoveryServiceFound, bonsoirService)
-        queryTxtRecord(bonsoirService)
+
+        // We do not need to queryTxtRecord here, as our code will call resolve() as
+        // soon as possible. This ensures that devices are not rediscovered when
+        // txt record is found.
     }
 
     override fun onServiceLost(service: NsdServiceInfo) {
